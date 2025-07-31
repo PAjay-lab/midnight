@@ -1,23 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Embed SAC Widget</title>
-  https://cognizant.eu10.hanacloudservices.cloud.sap/widgetquery/getWidgetData?storyId=A13C6387C48D41D07B7B1DD14AE73350&widgetId=Chart_1&type=kpiTile
+  <title>SAC Story Widget Example</title>
+  <style>
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+  </style>
 </head>
 <body>
-  <h1>Embedded SAC Widget</h1>
-  <div id="widgetContainer" style="width: 100%; height: 600px;"></div>
-
-  <script>
-    sap.sac.api.widget.renderWidget({
-      tenantUrl: "https://cognizant.eu10.hanacloudservices.cloud.sap",
-      storyId: "A13C6387C48D41D07B7B1DD14AE73350",
-      widgetId: "Chart_1", // Replace with actual widget ID
-      containerId: "widgetContainer",
-      auth: {
-        accessToken: "5adbc5f6-215d-41f1-a034-7534435de263$8ApX2_Zp3DC9rFxhAFO38HvAylXVJq0LZqlbGGj2-Fo=" // Replace with actual token
-      }
-    });
-  </script>
+ 
+<h2>SAP SAC Story with Widget API</h2>
+ 
+<!-- Embed the story -->
+<iframe id="sacFrame"
+  src="https://cognizant.eu10.hanacloudservices.cloud.sap/sap/fpa/ui/tenants/2e973/bo/story/A13C6387C48D41D07B7B1DD14AE73350?mode=embed"
+  allowfullscreen>
+</iframe>
+ 
+<script>
+  const iframe = document.getElementById('sacFrame');
+ 
+  // Wait for the iframe to load
+  iframe.onload = () => {
+    // Request widgets list
+    iframe.contentWindow.postMessage({
+      method: "getWidgets"
+    }, "*");
+  };
+ 
+  // Listen for messages from SAC
+  window.addEventListener("message", (event) => {
+    const data = event.data;
+ 
+    if (data && data.method === "getWidgets") {
+      console.log("📊 Widget List:", data.result);
+ 
+      // If you know the ID (e.g., Chart_1), get its data
+      iframe.contentWindow.postMessage({
+        method: "getData",
+        params: {
+          id: "Chart_1"
+        }
+      }, "*");
+    }
+ 
+    if (data && data.method === "getData") {
+      console.log("📈 Chart Data for Chart_1:", data.result);
+    }
+  });
+</script>
+ 
 </body>
 </html>
+ 
