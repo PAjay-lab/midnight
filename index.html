@@ -12,47 +12,13 @@
 </head>
 <body>
  
-<h2>SAP SAC Story with Widget API</h2>
+<h2>SAP SAC Story Chart Widget</h2>
  
 <!-- Embed the story -->
 <iframe id="sacFrame"
-  src="https://cognizant.eu10.hanacloudservices.cloud.sap/sap/fpa/ui/tenants/2e973/bo/story/A13C6387C48D41D07B7B1DD14AE73350?mode=embed"
+  src="https://cognizant.eu10.hanacloudservices.cloud.sap/sap/fpa/ui/tenants/2e973/bo/story/A13C6387C48D41D07B7B1DD14AE73350?mode=view&widgetId=Chart_1"
   allowfullscreen>
 </iframe>
- 
-<script>
-  const iframe = document.getElementById('sacFrame');
- 
-  // Wait for the iframe to load
-  iframe.onload = () => {
-    // Request widgets list
-    iframe.contentWindow.postMessage({
-      method: "getWidgets"
-    }, "*");
-  };
- 
-  // Listen for messages from SAC
-  window.addEventListener("message", (event) => {
-    const data = event.data;
- 
-    if (data && data.method === "getWidgets") {
-      console.log("📊 Widget List:", data.result);
- 
-      // If you know the ID (e.g., Chart_1), get its data
-      iframe.contentWindow.postMessage({
-        method: "getData",
-        params: {
-          id: "Chart_1"
-        }
-      }, "*");
-    }
- 
-    if (data && data.method === "getData") {
-      console.log("📈 Chart Data for Chart_1:", data.result);
-    }
-  });
-</script>
- 
 </body>
 </html>
  
