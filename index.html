@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Embed SAC Widget</title>
+  https://cognizant.eu10.hanacloudservices.cloud.sap/sap/fpa/ui/tenants/2e973/resources/widget-api.js
+</head>
+<body>
+  <h1>Embedded SAC Widget</h1>
+  <div id="widgetContainer" style="width: 100%; height: 600px;"></div>
+
+  <script>
+    sap.sac.api.widget.renderWidget({
+      tenantUrl: "https://cognizant.eu10.hanacloudservices.cloud.sap",
+      storyId: "A13C6387C48D41D07B7B1DD14AE73350",
+      widgetId: "Chart_1", // Replace with actual widget ID
+      containerId: "widgetContainer",
+      auth: {
+        accessToken: "5adbc5f6-215d-41f1-a034-7534435de263$8ApX2_Zp3DC9rFxhAFO38HvAylXVJq0LZqlbGGj2-Fo=" // Replace with actual token
+      }
+    });
+  </script>
+</body>
+</html>
