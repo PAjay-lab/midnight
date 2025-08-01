@@ -36,7 +36,7 @@
     const data = event.data;
  
     if (data && data.method === "getWidgets") {
-      console.log("📊 Widget List:", data.result);
+      console.log(" Widget List:", data.result);
  
       // If you know the ID (e.g., Chart_1), get its data
       iframe.contentWindow.postMessage({
@@ -48,7 +48,7 @@
     }
  
     if (data && data.method === "getData") {
-      console.log("📈 Chart Data for Chart_1:", data.result);
+      console.log(" Chart Data for Chart_1:", data.result);
     }
   });
 </script>
